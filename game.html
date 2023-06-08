@@ -2,15 +2,32 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Snake Game</title>
+	<title>Slurps Snake Game</title>
 	<link rel="shortcut icon" href="image/icon.ico">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<style>
 		/* Add any mobile-specific styles here */
-		.snake__game {
+		@media (max-width: 600px) {
+			.snake__game {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
 			
-			flex-direction: column;
-			align-items: center;
+			.game__canvas {
+				width: 100%;
+				height: auto;
+			}
+			
+			#snake {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.game__score {
+				width: 100%;
+				text-align: center;
+			}
 		}
 	</style>
 </head>
@@ -26,8 +43,6 @@
 		</div>
 		<div id="end" class="gameover"></div>
 	</div>
-
-
 
 	<script type="text/javascript" src="snake.js"></script>
 </body>
