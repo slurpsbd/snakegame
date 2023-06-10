@@ -143,37 +143,38 @@
       touchStartY = event.touches[0].clientY;
     }
 
-    function handleTouchMove(event) {
-      if (!touchStartX || !touchStartY) {
-        return;
+   function handleTouchMove(event) {
+  if (!touchStartX || !touchStartY) {
+    return;
+  }
+
+  let touchCurrentX = event.touches[0].clientX;
+  let touchCurrentY = event.touches[0].clientY;
+  let dx = touchCurrentX - touchStartX;
+  let dy = touchCurrentY - touchStartY;
+
+  if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 0 && dir != "LEFT") {
+        dir = "RIGHT";
+      } else if (dx < 0 && dir != "RIGHT") {
+        dir = "LEFT";
       }
-
-      let touchCurrentX = event.touches[0].clientX;
-      let touchCurrentY = event.touches[0].clientY;
-      let dx = touchCurrentX - touchStartX;
-      let dy = touchCurrentY - touchStartY;
-
-      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
-        if (Math.abs(dx) > Math.abs(dy)) {
-          if (dx > 0 && dir != "LEFT") {
-            dir = "RIGHT";
-          } else if (dx < 0 && dir != "RIGHT") {
-            dir = "LEFT";
-          }
-        } else {
-          if (dy > 0 && dir != "UP") {
-            dir = "DOWN";
-            window.scrollTo(0, 0); // Scroll to the top when sliding downwards
-            event.preventDefault(); // Prevent the default behavior of scrolling the page
-          } else if (dy < 0 && dir != "DOWN") {
-            dir = "UP";
-          }
-        }
-
-        touchStartX = touchCurrentX;
-        touchStartY = touchCurrentY;
+    } else {
+      if (dy > 0 && dir != "UP") {
+        dir = "DOWN";
+        window.scrollTo(0, 0); // Scroll to the top when sliding downwards
+        event.preventDefault(); // Prevent the default behavior of scrolling the page
+      } else if (dy < 0 && dir != "DOWN") {
+        dir = "UP";
       }
     }
+
+    touchStartX = touchCurrentX;
+    touchStartY = touchCurrentY;
+  }
+}
+
 
     // checking self touch by snake or not
     function collision(head, array) {
